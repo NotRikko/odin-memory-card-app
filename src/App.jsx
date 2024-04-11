@@ -8,6 +8,7 @@ function App() {
   const [chosenCards, setChosenCards] = useState([])
 
   const [score, setScore] = useState(0);
+  const [highScore, setHighScore] = useState(0);
 
   const pickCard = (name) => {
     if(chosenCards.includes(name)) {            
@@ -20,8 +21,10 @@ function App() {
   }
 
   useEffect(() => {
-
-  })
+    if(score > highScore) {
+      setHighScore(score);
+    }
+  }, [score, highScore]);
 
   const createCards = () => {
     const TestDataCopy = [...TestData];
@@ -44,8 +47,15 @@ function App() {
   };
 
 
+
+
   return (
     <>
+      <div id="header">
+        <h1>Memorization Game</h1>
+        <h3>Score: {score}</h3>
+        <h3>Score: {highScore}</h3>
+      </div>
       <div id="cards">
         {createCards()}
       </div>
